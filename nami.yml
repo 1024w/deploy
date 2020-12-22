@@ -1,5 +1,5 @@
 ---
-- hosts: jboot
+- hosts: all
   vars:
     http_port: 80
     max_clients: 200
@@ -9,6 +9,4 @@
   remote_user: root
   tasks:
   - name: git pull nami code
-    shell: chdir=/root/github/nami /bin/sh deploy.sh
-  - name: restart nami
-    systemd: state=restarted daemon_reload=yes name=nami
+    shell: uptime
