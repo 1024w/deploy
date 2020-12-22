@@ -1,0 +1,14 @@
+---
+- hosts: jboot
+  vars:
+    http_port: 80
+    max_clients: 200
+  environment:
+    PATH: /root/.nvm/versions/node/v12.19.1/bin:/usr/local/src/jdk1.8.0_131/bin:/bin:/opt/apache-maven-3.6.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+  remote_user: root
+  tasks:
+  - name: git pull nami code
+    shell: chdir=/root/github/nami /bin/sh deploy.sh
+  - name: restart nami
+    systemd: state=restarted daemon_reload=yes name=nami
